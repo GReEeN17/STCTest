@@ -16,7 +16,7 @@ public:
         file.seekg(0, ios::beg);
     }
 
-    long long get_size() const {
+    long long getSize() const {
         return size;
     }
 

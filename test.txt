@@ -1,1 +1,1 @@
-test
+testing this program is very easy just write some text and look on histogram to see how it looks like after being devided by the length if 5 bits

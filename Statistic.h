@@ -8,13 +8,23 @@ using std::bitset, std::cout;
 class Statistic {
 private:
     unsigned short* mass;
+    int max_value;
 public:
     explicit Statistic(unsigned char* mass_) {
         mass = (unsigned short*) mass_;
+        max_value = 0;
     }
 
-    int* make_statistic(int len, int size) {
-        int* stat = new int[(int)pow(2, len)];
+    int getMaxValue() {
+        return max_value;
+    }
+
+    int* makeStatistic(int len, int size) {
+        int stat_size = (int)pow(2, len);
+        int* stat = new int[stat_size];
+        for (int i = 0; i < stat_size; i++) {
+            stat[i] = 0;
+        }
         unsigned short mask = (unsigned short) pow(2, len) - 1;
         short cur, prev = 0, rest = len;
         for (int i = size / 2 - 1; i >= 0; i--) {
@@ -23,15 +33,11 @@ public:
             char cur_shift = len - rest;
             char point = rest - len;
             do {
-                uint16_t mask_prev = mask << prev_shift;
-                uint16_t konk_prev = mask_prev & prev;
-                uint16_t shift_prev = konk_prev >> prev_shift;
-                uint16_t mask_curr = mask >> cur_shift;
-                uint16_t konk_curr = mask_curr & cur;
-                uint16_t shift_curr = konk_curr << cur_shift;
-                int index = shift_curr | shift_prev;
-                //int index = (((mask << prev_shift) & prev) >> prev_shift) | (((mask >> cur_shift) & cur) << cur_shift);
+                int index = (((mask << prev_shift) & prev) >> prev_shift) | (((mask >> cur_shift) & cur) << cur_shift);
                 stat[index]++;
+                if (stat[index] > max_value) {
+                    max_value = stat[index];
+                }
                 rest = len;
                 point += len;
                 prev_shift = point;

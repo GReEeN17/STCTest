@@ -1,0 +1,12 @@
+#ifndef STCTEST_CONFIGBARCHART_H
+#define STCTEST_CONFIGBARCHART_H
+#define GL_SILENCE_DEPRECATION
+#include <OpenGL/gl.h>
+#include <OpenGL/OpenGL.h>
+#include <GLUT//glut.h>
+#define GLEW_STATIC
+
+int WINDOW_WIDTH = 1500;
+int WINDOW_HEIGHT = 500;
+
+#endif //STCTEST_CONFIGBARCHART_H
